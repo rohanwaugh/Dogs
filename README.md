@@ -4,7 +4,7 @@ This is sample application which will display dogs in Recyclerview.
 Design Pattern
 MVVM
 
-Jetpack components.
+Jetpack components
 1.AndroidX 
 2.AndroidKTX
 3.Multidex
