@@ -9,7 +9,9 @@
         android:label="ListFragment" >
         <action
             android:id="@+id/actionDetailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -17,6 +19,12 @@
         android:label="DetailsFragment" >
         <action
             android:id="@+id/actionListFragment"
-            app:destination="@id/listFragment" />
+            app:destination="@id/listFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <argument
+            android:name="dogUuid"
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
 </navigation>
