@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="default_margin">8dp</dimen>
+    <dimen name="list_item_height">125dp</dimen>
+    <dimen name="image_padding">4dp</dimen>
 </resources>
