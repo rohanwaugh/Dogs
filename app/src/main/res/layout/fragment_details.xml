@@ -8,6 +8,60 @@
         android:layout_height="match_parent"
         tools:context=".view.DetailsFragment">
 
+        <ImageView
+            android:id="@+id/dogImage"
+            android:src="@mipmap/ic_dog"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+        <TextView
+            android:id="@+id/dogName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Dog Name"
+            style="@style/Title"
+            android:layout_marginTop="@dimen/top_margin"
+            app:layout_constraintTop_toBottomOf="@+id/dogImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/dogPurpose"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Dog Purpose"
+            style="@style/Text"
+            android:layout_marginTop="@dimen/top_margin"
+            app:layout_constraintTop_toBottomOf="@+id/dogName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/dogTemparament"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Dog Temparament"
+            style="@style/Text"
+            android:layout_marginTop="@dimen/top_margin"
+            app:layout_constraintTop_toBottomOf="@+id/dogPurpose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/dogLifeSpan"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Dog Life Span"
+            style="@style/Text"
+            android:layout_marginTop="@dimen/top_margin"
+            app:layout_constraintTop_toBottomOf="@+id/dogTemparament"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
