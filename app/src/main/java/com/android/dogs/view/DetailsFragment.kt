@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.android.dogs.R
+import com.android.dogs.utils.getProgressDrawable
+import com.android.dogs.utils.loadImage
 import com.android.dogs.viewmodel.DogsDetailsViewModel
 import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.fragment_details.dogName
@@ -33,18 +35,18 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dogsDetailsViewModel = ViewModelProvider(this).get(DogsDetailsViewModel::class.java)
-        dogsDetailsViewModel.getDogDetails()
-
         arguments?.let {
             dogUuid = DetailsFragmentArgs.fromBundle(it).dogUuid
         }
 
-        observeViewModel()
+        dogsDetailsViewModel = ViewModelProvider(this).get(DogsDetailsViewModel::class.java)
+        dogsDetailsViewModel.getDogDetails(dogUuid)
 
+        observeViewModel()
     }
 
     private fun observeViewModel() {
+
         dogsDetailsViewModel.dogsDetails.observe(viewLifecycleOwner, Observer { dog ->
 
             dog?.let {
@@ -52,6 +54,9 @@ class DetailsFragment : Fragment() {
                 dogPurpose.text = dog.breedFor
                 dogTemparament.text = dog.temperament
                 dogLifeSpan.text = dog.lifeSpan
+                context?.let {
+                    dogImage.loadImage(dog.imageUrl,getProgressDrawable(it))
+                }
             }
         })
     }

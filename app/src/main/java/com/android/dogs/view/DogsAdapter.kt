@@ -30,7 +30,9 @@ class DogsAdapter(private val dogsList:ArrayList<DogBreed>): RecyclerView.Adapte
     override fun onBindViewHolder(holder: DogsViewHolder, position: Int) {
         holder.bindDog(dogsList[position])
         holder.itemView.setOnClickListener {
-            Navigation.findNavController(it).navigate(ListFragmentDirections.actionDetailsFragment())
+            val action = ListFragmentDirections.actionDetailsFragment()
+            action.dogUuid = dogsList[position].uuid
+            Navigation.findNavController(it).navigate(action)
         }
     }
 
