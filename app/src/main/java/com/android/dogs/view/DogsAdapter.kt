@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.android.dogs.R
 import com.android.dogs.model.DogBreed
@@ -26,6 +27,9 @@ class DogsAdapter(private val dogsList:ArrayList<DogBreed>): RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: DogsViewHolder, position: Int) {
         holder.bindDog(dogsList[position])
+        holder.itemView.setOnClickListener {
+            Navigation.findNavController(it).navigate(ListFragmentDirections.actionDetailsFragment())
+        }
     }
 
 

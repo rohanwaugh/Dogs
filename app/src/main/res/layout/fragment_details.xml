@@ -13,9 +13,10 @@
             android:src="@mipmap/ic_dog"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/default_margin"
             android:layout_height="200dp"/>
 
         <TextView
