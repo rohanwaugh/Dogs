@@ -26,6 +26,10 @@ android {
     }
     dataBinding.enabled = true
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
 }
 
 def lifecycle_version = "2.2.0"
