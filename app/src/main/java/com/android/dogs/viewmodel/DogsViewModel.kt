@@ -1,16 +1,19 @@
 package com.android.dogs.viewmodel
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.dogs.model.DogBreed
 import com.android.dogs.network.DogsService
+import com.android.dogs.room.DogDatabase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 
-class DogsViewModel : ViewModel() {
+class DogsViewModel(application: Application) : BaseViewModel(application) {
 
     private val dogsService = DogsService()
     private val disposable = CompositeDisposable()
@@ -31,9 +34,7 @@ class DogsViewModel : ViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<List<DogBreed>>() {
                     override fun onSuccess(dogsList: List<DogBreed>) {
-                        dogs.value = dogsList
-                        loading.value = false
-                        dogsLoadError.value = false
+                        storeDogToRoomDatabase(dogsList)
                     }
 
                     override fun onError(e: Throwable) {
@@ -44,6 +45,26 @@ class DogsViewModel : ViewModel() {
 
                 })
         )
+    }
+
+    private fun dogsRetrieved(dogsList:List<DogBreed>){
+        dogs.value = dogsList
+        loading.value = false
+        dogsLoadError.value = false
+    }
+
+    private fun storeDogToRoomDatabase(dogsList: List<DogBreed>){
+        launch {
+            val dao = DogDatabase(getApplication()).dogDao()
+            dao.deleteAllDogs()
+            val result = dao.insertAll(*dogsList.toTypedArray())
+            var i = 0
+            while (i < dogsList.size){
+                dogsList[i].uuid = result[i].toInt()
+                ++i
+            }
+            dogsRetrieved(dogsList)
+        }
     }
 
     override fun onCleared() {
