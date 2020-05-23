@@ -14,7 +14,8 @@
             android:layout_weight="2"
             android:contentDescription="@string/dog_img_content_description"
             android:padding="@dimen/image_padding"
-            android:scaleType="centerCrop" />
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_dog_round" />
 
         <LinearLayout
             android:layout_width="0dp"

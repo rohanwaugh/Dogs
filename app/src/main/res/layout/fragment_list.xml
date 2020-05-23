@@ -27,6 +27,7 @@
                 android:id="@+id/listError"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/list_error_text"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

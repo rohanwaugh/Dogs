@@ -32,8 +32,6 @@ class DogsAdapter(private val dogsList:ArrayList<DogBreed>): RecyclerView.Adapte
         }
     }
 
-
-
     inner class DogsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindDog(dogBreed: DogBreed) {
             itemView.dogName.text = dogBreed.dogBreed

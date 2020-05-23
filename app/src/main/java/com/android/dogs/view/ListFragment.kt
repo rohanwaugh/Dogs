@@ -40,6 +40,14 @@ class ListFragment : Fragment() {
             adapter = dogsListAdapter
         }
 
+        refreshLayout.setOnRefreshListener {
+            dogsList.visibility = View.GONE
+            listError.visibility = View.GONE
+            progressBar.visibility = View.VISIBLE
+            dogsViewModel.refresh()
+            refreshLayout.isRefreshing = false
+        }
+
         observeViewModel()
     }
 
@@ -52,7 +60,7 @@ class ListFragment : Fragment() {
         })
         dogsViewModel.dogsLoadError.observe(viewLifecycleOwner, Observer { isError ->
             isError?.let {
-                listError.visibility = View.VISIBLE
+                if(it)listError.visibility = View.VISIBLE else listError.visibility = View.GONE
             }
         })
 
