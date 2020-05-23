@@ -8,6 +8,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.android.dogs.R
 import com.android.dogs.model.DogBreed
+import com.android.dogs.utils.getProgressDrawable
+import com.android.dogs.utils.loadImage
 import kotlinx.android.synthetic.main.item_dog.view.*
 
 class DogsAdapter(private val dogsList:ArrayList<DogBreed>): RecyclerView.Adapter<DogsAdapter.DogsViewHolder>() {
@@ -36,6 +38,7 @@ class DogsAdapter(private val dogsList:ArrayList<DogBreed>): RecyclerView.Adapte
         fun bindDog(dogBreed: DogBreed) {
             itemView.dogName.text = dogBreed.dogBreed
             itemView.lifeSpan.text = dogBreed.lifeSpan
+            itemView.imageView.loadImage(dogBreed.imageUrl, getProgressDrawable(itemView.context))
         }
 
     }
