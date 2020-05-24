@@ -2,4 +2,7 @@
     <string name="app_name">Dogs</string>
     <string name="list_error_text">Something went wrong</string>
     <string name="dog_img_content_description">dog image</string>
+    <string name="endpoint_notification_text">Dogs retrieved from endpoint</string>
+    <string name="database_notification_text">Dogs retrieved from database</string>
+    <string name="notification_title">Dogs Notification</string>
 </resources>
