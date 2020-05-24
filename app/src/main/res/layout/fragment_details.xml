@@ -4,39 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="dog"
             type="com.android.dogs.model.DogBreed" />
+
+        <variable
+            name="palette"
+            type="com.android.dogs.model.DogPalette" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@{palette.color}"
         tools:context=".view.DetailsFragment">
 
         <ImageView
             android:id="@+id/dogImage"
-            android:contentDescription="@string/dog_img_content_description"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:scaleType="fitCenter"
-            android:imageUrl="@{dog.imageUrl}"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
+            android:layout_height="200dp"
             android:layout_marginTop="@dimen/default_margin"
-            android:layout_height="200dp"/>
+            android:contentDescription="@string/dog_img_content_description"
+            android:imageUrl="@{dog.imageUrl}"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/dogName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Dog Name"
             style="@style/Title"
-            android:layout_marginTop="@dimen/top_margin"
-            app:layout_constraintTop_toBottomOf="@+id/dogImage"
-            android:text="@{dog.dogBreed}"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/top_margin"
+            android:text="@{dog.dogBreed}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dogImage"
+            tools:text="Dog Name" />
 
         <TextView
             android:id="@+id/dogPurpose"
@@ -46,38 +52,38 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/top_margin"
             android:layout_marginEnd="8dp"
+            android:text="@{dog.breedFor}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dogName"
-            android:text="@{dog.breedFor}"
             tools:text="Dog Purpose" />
 
         <TextView
             android:id="@+id/dogTemparament"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Dog Temparament"
             style="@style/Text"
-            android:textAlignment="center"
-            android:layout_marginTop="@dimen/top_margin"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            app:layout_constraintTop_toBottomOf="@+id/dogPurpose"
-            android:text="@{dog.temperament}"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/top_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:text="@{dog.temperament}"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dogPurpose"
+            tools:text="Dog Temparament" />
 
         <TextView
             android:id="@+id/dogLifeSpan"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Dog Life Span"
             style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/top_margin"
             android:text="@{dog.lifeSpan}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dogTemparament"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            tools:text="Dog Life Span" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
