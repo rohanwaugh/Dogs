@@ -22,7 +22,7 @@ class DogsViewModel(application: Application) : BaseViewModel(application) {
 
     private val context = getApplication<Application>().applicationContext
 
-    private val prefsHelper = SharedPreferenceHelper(getApplication())
+    private val prefsHelper = SharedPreferenceHelper(context)
 
     private val dogsService = DogsService()
     private val disposable = CompositeDisposable()
@@ -53,7 +53,7 @@ class DogsViewModel(application: Application) : BaseViewModel(application) {
                 .subscribeWith(object : DisposableSingleObserver<List<DogBreed>>() {
                     override fun onSuccess(dogsList: List<DogBreed>) {
                         storeDogToRoomDatabase(dogsList)
-                        NotificationsHelper(getApplication()).createNotification(context.getString(R.string.endpoint_notification_text))
+                        NotificationsHelper(context).createNotification(context.getString(R.string.endpoint_notification_text))
                     }
 
                     override fun onError(e: Throwable) {
@@ -69,9 +69,9 @@ class DogsViewModel(application: Application) : BaseViewModel(application) {
         loading.value = true
 
         launch {
-            val dogsList = DogDatabase(getApplication()).dogDao().getAllDogs()
+            val dogsList = DogDatabase(context).dogDao().getAllDogs()
             dogsRetrieved(dogsList)
-            NotificationsHelper(getApplication()).createNotification(context.getString(R.string.database_notification_text))
+            NotificationsHelper(context).createNotification(context.getString(R.string.database_notification_text))
         }
     }
 
@@ -83,7 +83,7 @@ class DogsViewModel(application: Application) : BaseViewModel(application) {
 
     private fun storeDogToRoomDatabase(dogsList: List<DogBreed>) {
         launch {
-            val dao = DogDatabase(getApplication()).dogDao()
+            val dao = DogDatabase(context).dogDao()
             dao.deleteAllDogs()
             val result = dao.insertAll(*dogsList.toTypedArray())
             var i = 0
