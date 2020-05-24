@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="dog"
+            type="com.android.dogs.model.DogBreed" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,6 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:scaleType="fitCenter"
+            android:imageUrl="@{dog.imageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/default_margin"
@@ -27,6 +34,7 @@
             style="@style/Title"
             android:layout_marginTop="@dimen/top_margin"
             app:layout_constraintTop_toBottomOf="@+id/dogImage"
+            android:text="@{dog.dogBreed}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -41,6 +49,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dogName"
+            android:text="@{dog.breedFor}"
             tools:text="Dog Purpose" />
 
         <TextView
@@ -54,6 +63,7 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
             app:layout_constraintTop_toBottomOf="@+id/dogPurpose"
+            android:text="@{dog.temperament}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
 
@@ -64,6 +74,7 @@
             tools:text="Dog Life Span"
             style="@style/Text"
             android:layout_marginTop="@dimen/top_margin"
+            android:text="@{dog.lifeSpan}"
             app:layout_constraintTop_toBottomOf="@+id/dogTemparament"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

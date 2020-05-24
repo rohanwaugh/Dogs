@@ -2,10 +2,29 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="dog"
+            type="com.android.dogs.model.DogBreed" />
+
+        <variable
+            name="listener"
+            type="com.android.dogs.view.DogClickListener" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/list_item_height"
+        android:onClick="@{listener::onDogClicked}"
         android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/dogId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@{String.valueOf(dog.uuid)}"/>
 
         <ImageView
             android:id="@+id/imageView"
@@ -13,6 +32,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:contentDescription="@string/dog_img_content_description"
+            android:imageUrl="@{dog.imageUrl}"
             android:padding="@dimen/image_padding"
             android:scaleType="fitCenter" />
 
@@ -29,6 +49,7 @@
                 style="@style/Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{dog.dogBreed}"
                 tools:text="Dog Name" />
 
             <TextView
@@ -36,6 +57,7 @@
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{dog.lifeSpan}"
                 tools:text="Life Span" />
 
         </LinearLayout>

@@ -5,15 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.android.dogs.R
-import com.android.dogs.utils.getProgressDrawable
-import com.android.dogs.utils.loadImage
+import com.android.dogs.databinding.FragmentDetailsBinding
 import com.android.dogs.viewmodel.DogsDetailsViewModel
-import kotlinx.android.synthetic.main.fragment_details.*
-import kotlinx.android.synthetic.main.fragment_details.dogName
-import kotlinx.android.synthetic.main.item_dog.*
 
 
 /**
@@ -24,12 +21,19 @@ class DetailsFragment : Fragment() {
     private lateinit var dogsDetailsViewModel: DogsDetailsViewModel
     private var dogUuid = 0
 
+    private lateinit var dataBinding: FragmentDetailsBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details, container, false)
+        dataBinding = DataBindingUtil.inflate<FragmentDetailsBinding>(
+            LayoutInflater.from(context),
+            R.layout.fragment_details,
+            container,
+            false
+        )
+        return dataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,13 +54,7 @@ class DetailsFragment : Fragment() {
         dogsDetailsViewModel.dogsDetails.observe(viewLifecycleOwner, Observer { dog ->
 
             dog?.let {
-                dogName.text = dog.dogBreed
-                dogPurpose.text = dog.breedFor
-                dogTemparament.text = dog.temperament
-                dogLifeSpan.text = dog.lifeSpan
-                context?.let {
-                    dogImage.loadImage(dog.imageUrl,getProgressDrawable(it))
-                }
+                dataBinding.dog = dog
             }
         })
     }
