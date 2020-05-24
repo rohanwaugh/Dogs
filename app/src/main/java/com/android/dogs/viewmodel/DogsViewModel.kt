@@ -1,28 +1,26 @@
 package com.android.dogs.viewmodel
 
 import android.app.Application
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.android.dogs.R
 import com.android.dogs.model.DogBreed
 import com.android.dogs.network.DogsService
 import com.android.dogs.room.DogDatabase
 import com.android.dogs.utils.NotificationsHelper
-import com.android.dogs.utils.REFRESH_TIME
 import com.android.dogs.utils.SharedPreferenceHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
+import java.lang.NumberFormatException
 
 class DogsViewModel(application: Application) : BaseViewModel(application) {
 
     private val context = getApplication<Application>().applicationContext
 
     private val prefsHelper = SharedPreferenceHelper(context)
+    private var refreshTime = 5 * 60 * 1000 * 1000 * 1000L
 
     private val dogsService = DogsService()
     private val disposable = CompositeDisposable()
@@ -32,11 +30,22 @@ class DogsViewModel(application: Application) : BaseViewModel(application) {
     val loading = MutableLiveData<Boolean>()
 
     fun refresh() {
+        checkCacheDuration()
         val updateTime = prefsHelper.getUpdateTime()
-        if (updateTime != null && updateTime != 0L && System.nanoTime() - updateTime < REFRESH_TIME) {
+        if (updateTime != null && updateTime != 0L && System.nanoTime() - updateTime < refreshTime) {
             fetchFromDatabase()
         } else {
             fetchFromRemote()
+        }
+    }
+
+    private fun checkCacheDuration(){
+        val cachePreference = prefsHelper.getCacheDuration()
+        try {
+            val cachePreferenceInt = cachePreference?.toInt() ?: 5 * 60
+            refreshTime = cachePreferenceInt.times(1000 * 1000 * 1000L)
+        }catch (e: NumberFormatException){
+            e.printStackTrace()
         }
     }
 

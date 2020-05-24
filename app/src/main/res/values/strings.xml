@@ -5,4 +5,6 @@
     <string name="endpoint_notification_text">Dogs retrieved from endpoint</string>
     <string name="database_notification_text">Dogs retrieved from database</string>
     <string name="notification_title">Dogs Notification</string>
+    <string name="cache_preference_title">Cache duration in seconds</string>
+    <string name="settings_title">Settings</string>
 </resources>

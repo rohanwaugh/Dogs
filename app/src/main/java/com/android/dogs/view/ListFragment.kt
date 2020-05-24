@@ -1,12 +1,11 @@
 package com.android.dogs.view
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.dogs.R
 import com.android.dogs.viewmodel.DogsViewModel
@@ -25,7 +24,7 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
@@ -60,19 +59,38 @@ class ListFragment : Fragment() {
         })
         dogsViewModel.dogsLoadError.observe(viewLifecycleOwner, Observer { isError ->
             isError?.let {
-                if(it)listError.visibility = View.VISIBLE else listError.visibility = View.GONE
+                if (it) listError.visibility = View.VISIBLE else listError.visibility = View.GONE
             }
         })
 
-        dogsViewModel.loading.observe(viewLifecycleOwner, Observer {isLoading->
+        dogsViewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
             isLoading?.let {
-                progressBar.visibility = if(it) View.VISIBLE else View.GONE
-                if(it){
+                progressBar.visibility = if (it) View.VISIBLE else View.GONE
+                if (it) {
                     dogsList.visibility = View.GONE
                     listError.visibility = View.GONE
                 }
             }
         })
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.list_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+
+            R.id.actionSettings -> {
+                view?.let {
+                    Navigation.findNavController(it)
+                        .navigate(ListFragmentDirections.actionSettingsFragment())
+                }
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }
