@@ -7,3 +7,4 @@ const val CHANNEL_ID = "Dogs channel id"
 const val CHANNEL_NAME = "channel name"
 const val CHANNEL_DESCRIPTION = "Channel Description"
 const val NOTIFICATION_ID = 123
+const val PERMISSION_SEND_SMS = 1001
