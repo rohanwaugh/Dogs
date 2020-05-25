@@ -81,6 +81,9 @@ class DetailsFragment : Fragment() {
         })
     }
 
+    /* This method will get the background color from the dog image using Palette library
+    *  and set the same color as background to details fragment.
+    * */
     private fun setupBackgroundColor(url: String) {
         Glide.with(this)
             .asBitmap()
@@ -101,11 +104,13 @@ class DetailsFragment : Fragment() {
             })
     }
 
+    /* This function will setup Menu for DetailsFragment. */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.details_menu, menu)
     }
 
+    /* This function will handle MenuItem click. */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.actionSendSms -> {
@@ -128,6 +133,7 @@ class DetailsFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    /* This method is called from MainActivity with SMS permission granted value (true or false)*/
     fun onPermissionResult(permissionGranted: Boolean) {
         if (sendSmsStarted && permissionGranted) {
             context?.let {
@@ -158,6 +164,7 @@ class DetailsFragment : Fragment() {
         }
     }
 
+    /* This function will send SMS. */
     private fun sendSMS(smsInfo: SmsInfo) {
         val intent = Intent(context, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)

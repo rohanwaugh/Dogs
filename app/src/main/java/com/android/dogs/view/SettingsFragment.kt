@@ -10,7 +10,7 @@ import androidx.preference.PreferenceFragmentCompat
 import com.android.dogs.R
 
 /**
- * A simple [Fragment] subclass.
+ * This is SettingsFragment class.
  */
 class SettingsFragment : PreferenceFragmentCompat() {
 

@@ -5,6 +5,9 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 
+/* This is SharedPreferenceHelper class which is used to store and get data from SharedPreference.
+*  This is implemented using Singleton design pattern.
+* */
 class SharedPreferenceHelper {
 
     companion object {

@@ -5,6 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+/* This data class is used for storing Dog information. Also this is Entity(table)
+*  for Room database
+* */
 @Entity
 data class DogBreed(
     @ColumnInfo(name = "breed_id")
@@ -34,12 +37,15 @@ data class DogBreed(
     @SerializedName("url")
     val imageUrl: String?
 ){
+    // This is primary key for database table
     @PrimaryKey(autoGenerate = true)
     var uuid: Int = 0
 }
 
+/* This data class is used for Palette functionality. */
 data class DogPalette(val color:Int)
 
+/* This data class is used for SMS functionality. */
 data class SmsInfo(
     var to: String,
     var text: String,

@@ -7,6 +7,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
+/* This is BaseViewModel class which will provide CoroutineScope to all
+*  ViewModel used in our application.
+* */
 abstract class BaseViewModel(application: Application) : AndroidViewModel(application),
     CoroutineScope {
 

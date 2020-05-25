@@ -15,6 +15,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import java.lang.NumberFormatException
 
+/* This is ViewModel for ListFragment. */
 class DogsViewModel(application: Application) : BaseViewModel(application) {
 
     private val context = getApplication<Application>().applicationContext
@@ -29,6 +30,9 @@ class DogsViewModel(application: Application) : BaseViewModel(application) {
     val dogsLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
 
+    /* This method is called from ListFragment and will fetch Dogs data either from
+    *  endPoint (using Retrofit) or from database(room) based on if Cache is expired or not.
+    *  */
     fun refresh() {
         checkCacheDuration()
         val updateTime = prefsHelper.getUpdateTime()
@@ -39,20 +43,25 @@ class DogsViewModel(application: Application) : BaseViewModel(application) {
         }
     }
 
-    private fun checkCacheDuration(){
+    /* This function will read Cache duration from SharedPreference and update the refreshTime*/
+    private fun checkCacheDuration() {
         val cachePreference = prefsHelper.getCacheDuration()
         try {
             val cachePreferenceInt = cachePreference?.toInt() ?: 5 * 60
             refreshTime = cachePreferenceInt.times(1000 * 1000 * 1000L)
-        }catch (e: NumberFormatException){
+        } catch (e: NumberFormatException) {
             e.printStackTrace()
         }
     }
 
+    /* this function will bypass the Cache logic and will always fetch data from endpoint. */
     fun refreshBypassCache() {
         fetchFromRemote()
     }
 
+    /* This function will actually fetch dogs data using Retrofit and RxJava
+    *  When Success-> Stores data into Room database
+    * */
     private fun fetchFromRemote() {
         loading.value = true
         disposable.add(
@@ -74,6 +83,7 @@ class DogsViewModel(application: Application) : BaseViewModel(application) {
         )
     }
 
+    /* This function will fetch dogs data from Room database.*/
     private fun fetchFromDatabase() {
         loading.value = true
 
@@ -84,12 +94,17 @@ class DogsViewModel(application: Application) : BaseViewModel(application) {
         }
     }
 
+    /* This function will update all LiveData objects with corresponding data.
+    *  LisFragment is observing all LiveData objects. Once value is set here, Listfragment will get
+    *  notification.
+    * */
     private fun dogsRetrieved(dogsList: List<DogBreed>) {
         dogs.value = dogsList
         loading.value = false
         dogsLoadError.value = false
     }
 
+    /* This function will store Dogs data to Room database*/
     private fun storeDogToRoomDatabase(dogsList: List<DogBreed>) {
         launch {
             val dao = DogDatabase(context).dogDao()
@@ -105,6 +120,9 @@ class DogsViewModel(application: Application) : BaseViewModel(application) {
         prefsHelper.saveUpdateTime(System.nanoTime())
     }
 
+    /* This is ViewModel lifecycle method which is called when ViewModel is getting cleared.
+    *  Here we are clearing RxJava Disposable object.
+    * */
     override fun onCleared() {
         super.onCleared()
         disposable.clear()

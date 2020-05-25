@@ -15,6 +15,7 @@ import com.android.dogs.R
 import com.android.dogs.utils.PERMISSION_SEND_SMS
 import kotlinx.android.synthetic.main.activity_main.*
 
+/* This is MainActivity of the application. */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
@@ -31,6 +32,10 @@ class MainActivity : AppCompatActivity() {
         return NavigationUI.navigateUp(navController, null)
     }
 
+    /* This function will check if application has access to send SMS.
+    *  If not then it will show Request Permission Rational to the user.
+    *  If user click Yes on rational then he will be shown Request Permission popup
+    * */
     fun checkSmsPermission() {
         if (ContextCompat.checkSelfPermission(
                 this,
@@ -61,11 +66,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /* This will show User request Permission dialog. */
     private fun requestSmsPermission() {
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.SEND_SMS),
             PERMISSION_SEND_SMS)
     }
 
+    /* This is request callback method. Here we can determine whether user
+    *  has granted permission or not.
+    * */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -83,6 +92,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /* This function will notify DetailsFragment weather user has granted permission
+    *  or not.
+    * */
     private fun notifyDetailFragment(permissionGranted: Boolean) {
         val activeFragment = fragment.childFragmentManager.primaryNavigationFragment
         if(activeFragment is DetailsFragment){

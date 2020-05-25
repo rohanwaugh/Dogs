@@ -11,9 +11,11 @@ import com.android.dogs.databinding.ItemDogBinding
 import com.android.dogs.model.DogBreed
 import kotlinx.android.synthetic.main.item_dog.view.*
 
+/* This is RecyclerView adapter class. */
 class DogsAdapter(private val dogsList: ArrayList<DogBreed>) :
     RecyclerView.Adapter<DogsAdapter.DogsViewHolder>(), DogClickListener {
 
+    /**/
     fun updateDogsList(newDogsList: List<DogBreed>) {
         dogsList.clear()
         dogsList.addAll(newDogsList)
@@ -41,6 +43,7 @@ class DogsAdapter(private val dogsList: ArrayList<DogBreed>) :
         Navigation.findNavController(v).navigate(action)
     }
 
+    /* This is Recyclerview Holder class. */
     inner class DogsViewHolder(var view: ItemDogBinding) : RecyclerView.ViewHolder(view.root)
 
 

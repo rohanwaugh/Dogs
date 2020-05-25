@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_list.*
 
 
 /**
- * A simple [Fragment] subclass.
+ * This is ListFragment which will show Dogs in Recyclerview
  */
 class ListFragment : Fragment() {
 
@@ -24,6 +24,7 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Enable Menu for this Fragment
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
@@ -39,6 +40,7 @@ class ListFragment : Fragment() {
             adapter = dogsListAdapter
         }
 
+        // SwipeRefreshLayout on refresh click listener
         refreshLayout.setOnRefreshListener {
             dogsList.visibility = View.GONE
             listError.visibility = View.GONE
@@ -50,6 +52,7 @@ class ListFragment : Fragment() {
         observeViewModel()
     }
 
+    /* This function observers ViewModel LiveData objects*/
     private fun observeViewModel() {
         dogsViewModel.dogs.observe(viewLifecycleOwner, Observer { dogs ->
             dogs?.let {
@@ -75,11 +78,13 @@ class ListFragment : Fragment() {
 
     }
 
+    /* This function will setup Menu for ListFragment. */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.list_menu, menu)
     }
 
+    /* This function will handle MenuItem click. */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
 

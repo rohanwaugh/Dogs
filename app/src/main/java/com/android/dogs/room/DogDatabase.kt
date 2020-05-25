@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.android.dogs.model.DogBreed
 
+/* This is RoomDatabase class which implemented using Singleton design pattern. */
 @Database(entities = [DogBreed::class], version = 1)
 abstract class DogDatabase : RoomDatabase() {
 

@@ -12,6 +12,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.android.dogs.R
 import com.android.dogs.view.MainActivity
 
+/* This is NotificationHelper class which is used to create Local Notifications. */
 class NotificationsHelper(val context: Context) {
 
     fun createNotification(notificationContentText :String){

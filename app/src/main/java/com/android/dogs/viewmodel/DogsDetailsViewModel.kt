@@ -6,6 +6,7 @@ import com.android.dogs.model.DogBreed
 import com.android.dogs.room.DogDatabase
 import kotlinx.coroutines.launch
 
+/* This is ViewModel for DetailsFragment. */
 class DogsDetailsViewModel(application: Application) : BaseViewModel(application) {
 
     val dogsDetails = MutableLiveData<DogBreed>()
