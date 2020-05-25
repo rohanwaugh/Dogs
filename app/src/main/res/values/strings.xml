@@ -7,4 +7,6 @@
     <string name="notification_title">Dogs Notification</string>
     <string name="cache_preference_title">Cache duration in seconds</string>
     <string name="settings_title">Settings</string>
+    <string name="send_sms_title">Send SMS</string>
+    <string name="share_title">Share</string>
 </resources>
