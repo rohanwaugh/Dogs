@@ -16,6 +16,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -41,8 +42,11 @@ def rxJavaVersion = '2.0.2'
 def refreshLayoutVersion = '1.0.0'
 def recyclerViewVersion = '1.1.0'
 def roomVersion = '2.2.5'
-def navVersion = '2.3.0-alpha06'
+def navVersion = '2.3.0-beta01'
 def preferencesVersion = '1.1.1'
+def paletteVersion = '1.0.0'
+def firebaseVersion = '17.4.2'
+def multidexVersion ='1.0.3'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -85,10 +89,18 @@ dependencies {
 
     implementation "androidx.preference:preference:$preferencesVersion"
 
+    implementation "androidx.palette:palette-ktx:$paletteVersion"
+
+    //This library is added to introduce MultiDex issue
+    implementation "com.google.firebase:firebase-core:$firebaseVersion"
+
+    // This multidex library is added to remove Multidex issue
+    implementation "com.android.support:multidex:$multidexVersion"
+
     testImplementation 'junit:junit:4.12'
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
     testImplementation "android.arch.core:core-testing:1.1.1"
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'androidx.palette:palette-ktx:1.0.0'
+
 }
