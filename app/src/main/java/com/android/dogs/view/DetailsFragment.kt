@@ -20,6 +20,7 @@ import com.android.dogs.databinding.SendSmsDialogBinding
 import com.android.dogs.model.DogBreed
 import com.android.dogs.model.DogPalette
 import com.android.dogs.model.SmsInfo
+import com.android.dogs.utils.INTENT_TYPE
 import com.android.dogs.viewmodel.DogsDetailsViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -113,7 +114,15 @@ class DetailsFragment : Fragment() {
             }
 
             R.id.actionShare -> {
-
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = INTENT_TYPE
+                intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.intent_subject))
+                intent.putExtra(
+                    Intent.EXTRA_TEXT,
+                    "${currentDog?.dogBreed} bred for ${currentDog?.breedFor}"
+                )
+                intent.putExtra(Intent.EXTRA_STREAM, currentDog?.imageUrl)
+                startActivity(Intent.createChooser(intent, getString(R.string.intent_share_title)))
             }
         }
         return super.onOptionsItemSelected(item)

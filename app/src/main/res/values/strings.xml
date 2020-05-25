@@ -16,4 +16,6 @@
     <string name="sms_hint_text">To:</string>
     <string name="send_sms_button_text">Send SMS</string>
     <string name="cancel_button_text">Cancel</string>
+    <string name="intent_subject">Check out this dog breed</string>
+    <string name="intent_share_title">Share with</string>
 </resources>
